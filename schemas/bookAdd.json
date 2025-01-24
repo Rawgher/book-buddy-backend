@@ -1,0 +1,12 @@
+{
+    "type": "object",
+    "properties": {
+      "book_id": { "type": "string" },
+      "title": { "type": "string" },
+      "authors": { "type": "string" },
+      "thumbnail_url": { "type": "string", "format": "uri" },
+      "comment": { "type": ["string", "null"] }
+    },
+    "required": ["book_id", "title", "authors", "thumbnail_url"],
+    "additionalProperties": false
+}
