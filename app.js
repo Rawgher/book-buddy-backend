@@ -1,6 +1,5 @@
 const express = require('express');
 const cors = require('cors');
-const path = require('path');
 
 const { NotFoundError } = require("./expressError");
 const morgan = require("morgan");
@@ -22,16 +21,10 @@ app.use("/auth", authRoutes);
 app.use("/users", userRoutes);
 app.use("/books", bookRoutes);
 
-app.use(express.static(path.join(__dirname, 'dist')));
-
-app.get('*', (req, res) => {
-  res.sendFile(path.resolve(__dirname, 'dist', 'index.html'));
-});
-
 /** Handle 404 errors -- this matches everything */
-// app.use(function (req, res, next) {
-//   return next(new NotFoundError());
-// });
+app.use(function (req, res, next) {
+  return next(new NotFoundError());
+});
 
 /** Generic error handler; anything unhandled goes here. */
 app.use(function (err, req, res, next) {
