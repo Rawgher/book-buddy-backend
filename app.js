@@ -22,10 +22,10 @@ app.use("/auth", authRoutes);
 app.use("/users", userRoutes);
 app.use("/books", bookRoutes);
 
-// Serve static files from the "build" directory
+// Serve static files from the root-level "dist" directory
 app.use(express.static(path.join(__dirname, "dist")));
 
-// Add a catch-all route to serve index.html
+// Catch-all route to serve index.html for SPA routing
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "dist", "index.html"));
 });
