@@ -21,6 +21,8 @@ app.use("/auth", authRoutes);
 app.use("/users", userRoutes);
 app.use("/books", bookRoutes);
 
+app.use(express.static('dist'));
+
 /** Handle 404 errors -- this matches everything */
 app.use(function (req, res, next) {
   return next(new NotFoundError());
