@@ -23,6 +23,10 @@ app.use("/books", bookRoutes);
 
 app.use(express.static('dist'));
 
+app.get('*', (req, res) => {
+  res.sendFile('index.html', { root: 'dist' });
+});
+
 /** Handle 404 errors -- this matches everything */
 app.use(function (req, res, next) {
   return next(new NotFoundError());
