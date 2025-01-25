@@ -46,7 +46,18 @@ router.post("/register", async function (req, res, next) {
   try {
     const validator = jsonschema.validate(req.body, userRegisterSchema);
     if (!validator.valid) {
-      const errs = validator.errors.map((e) => e.stack);
+      const errs = validator.errors.map((e) => {
+        const field = e.path[0];
+        let message;
+        if (field === "email") {
+          message = "Please enter a valid email address.";
+        } else if (field === "password") {
+          message = "Password must be at least 8 characters long.";
+        } else {
+          message = e.stack;
+        }
+        return { field, message };
+      });
       throw new BadRequestError(errs);
     }
 
